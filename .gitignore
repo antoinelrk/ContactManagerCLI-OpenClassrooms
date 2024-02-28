@@ -1,0 +1,7 @@
+.vscode/
+.idea/
+
+*compose.yml
+.env
+package-lock.json
+composer.lock
