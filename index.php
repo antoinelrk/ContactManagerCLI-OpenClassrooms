@@ -17,25 +17,27 @@ while($on) {
     switch($command) {
         case "detail":
             $data = $contact->find(intval($params[0]));
-            draw($data);
+            printTable($data);
 
             break;
         case "list":
             $data = $contact->all();
-            draw($data);
+            printTable($data);
 
             break;
-        case "q":
+        case "quit":
             Helper::print("Goodbye");
             $on = false;
             break;
+        default:
+            Helper::print("Command '$command' not found!");
     }
 }
 
-function draw($data) {
-    echo "+---+-------------------------------+-----------------------------------+----------------------+\n";
-    echo "| # | Name                          | Email                             | Phone Number         |\n";
-    echo "+---+-------------------------------+-----------------------------------+----------------------+\n";
+function printTable($data) {
+    Helper::print("+---+-------------------------------+-----------------------------------+----------------------+");
+    Helper::print("| # | Name                          | Email                             | Phone Number         |");
+    Helper::print("+---+-------------------------------+-----------------------------------+----------------------+");
 
     foreach ($data as $element) {
         printf(
