@@ -2,8 +2,6 @@ FROM alpine:3.19
 
 RUN mkdir /var/www
 
-COPY ./config/php.ini /etc/php83/php.ini
-
 WORKDIR /var/www
 
 RUN apk update && \

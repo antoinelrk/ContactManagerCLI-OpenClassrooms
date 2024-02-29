@@ -1,26 +1,51 @@
 <?php
-require './core/Helper.php';
+require_once './core/Helper.php';
+require_once './core/Contact.php';
 
-include './includes/bootstrap.php';
+include_once './includes/bootstrap.php';
+
+$contact = new Contact($connection);
 
 $on = true;
 
 while($on) {
-    $line = readline("Entrez votre commande: ");
+    $raws = explode(' ', readline("Entrez votre commande: "));
+    $command = array_shift($raws);
 
-    switch($line) {
+    $params = $raws;
+
+    switch($command) {
+        case "detail":
+            $data = $contact->find(intval($params[0]));
+            draw($data);
+
+            break;
         case "list":
-            $query = $connection->prepare("SELECT * FROM contacts");
-            $query->execute();
-            $data = $query->fetchAll();
+            $data = $contact->all();
+            draw($data);
 
-            foreach ($data as $element) {
-                Helper::print("\033[0;31m| " . $element['name'] . " | " . $element['email'] . " | " . $element['phone_number'] . " |\033[0m");
-            }
             break;
         case "q":
             Helper::print("Goodbye");
             $on = false;
             break;
     }
+}
+
+function draw($data) {
+    echo "+---+-------------------------------+-----------------------------------+----------------------+\n";
+    echo "| # | Name                          | Email                             | Phone Number         |\n";
+    echo "+---+-------------------------------+-----------------------------------+----------------------+\n";
+
+    foreach ($data as $element) {
+        printf(
+            "| %-1s | %-29s | %-33s | %-20s |\n",
+            $element['id'],
+            $element['name'],
+            $element['email'],
+            $element['phone_number'],
+        );
+    }
+
+    echo "+---+-------------------------------+-----------------------------------+----------------------+\n";
 }
