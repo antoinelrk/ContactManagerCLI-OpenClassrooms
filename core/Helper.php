@@ -11,22 +11,13 @@ class Helper
         // Foreground: \x1b[38;2;128;128;128m
         // Background: \x1b[48;2;200;200;200m
 
-        switch($type) {
-            case "info":
-                return "\x1b[38;2;44;154;249m";
-                break;
-            case "success":
-                return "\x1b[38;2;44;249;65m";
-                break;
-            case "warning":
-                return "\x1b[38;2;249;215;44m";
-                break;
-            case "error":
-                return "\x1b[38;2;249;48;44m";
-                break;
-            default:
-                return "";
-        }
+        return match ($type) {
+            "info" => "\x1b[38;2;44;154;249m",
+            "success" => "\x1b[38;2;44;249;65m",
+            "warning" => "\x1b[38;2;249;215;44m",
+            "error" => "\x1b[38;2;249;48;44m",
+            default => "",
+        };
     }
 
     public static function print(string $value, string $level = null): void
