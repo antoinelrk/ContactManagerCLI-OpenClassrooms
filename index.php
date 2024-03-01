@@ -33,6 +33,7 @@ while($on) {
             break;
         case "help":
             $commandManager->help($command, $params);
+            break;
         case "quit":
             Helper::print("Goodbye");
             $on = false;
