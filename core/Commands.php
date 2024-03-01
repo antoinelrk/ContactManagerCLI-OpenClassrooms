@@ -22,9 +22,19 @@ readonly class Commands
 
     public function help(): void
     {
+        /**
+         * TODO: Remplacer le print par un printf avec un pattern.
+         */
         foreach ($this->registeredCommands() as $key => $command)
         {
-            Helper::print($key . ' - ' . $command, 'command');
+            Helper::print(
+                Helper::foreground('cyan') .
+                Helper::background('gray') .
+                $key .
+                Helper::reset() .
+                ' - ' .
+                $command
+            );
         }
     }
 
@@ -38,10 +48,5 @@ readonly class Commands
             'delete' => 'Usage: delete [id INT]',
             'help' => 'Usage: Show this help! :)'
         ];
-    }
-
-    public function render(): void
-    {
-
     }
 }
