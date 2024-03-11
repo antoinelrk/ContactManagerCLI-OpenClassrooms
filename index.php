@@ -10,36 +10,40 @@ $on = true;
 $contact = new Contact($connection);
 $commandManager = new Commands($connection);
 
-while($on) {
-    $raws = explode(' ', readline("Entrez votre commande: "));
-    $command = array_shift($raws);
-    $params = $raws;
+function canard() {
+    $bar = "oui";
 
-    switch($command) {
+    return compact(['bar']);
+}
+
+while($on) {
+    $command = $commandManager->initCommand(readline("Entrez votre commande: "));
+
+    switch($command->commandName) {
         case "detail":
-            $commandManager->detail($command, $params);
+            $commandManager->detail($command->commandName, $command->params);
             break;
         case "list":
-            $commandManager->list($command, $params);
+            $commandManager->list($command->commandName, $command->params);
             break;
         case "create":
-            $commandManager->create($command, $params);
+            $commandManager->create($command->commandName, $command->line);
             break;
         case "update":
-            $commandManager->update($command, $params);
+            $commandManager->update($command->commandName, $command->line);
             break;
         case "delete":
-            $commandManager->delete($command, $params);
+            $commandManager->delete($command->commandName, $command->params);
             break;
         case "help":
-            $commandManager->help($command, $params);
+            $commandManager->help($command->commandName, $command->params);
             break;
         case "quit":
             Helper::print("Goodbye");
             $on = false;
             break;
         default:
-            Helper::print("Command '$command' not found!", 'error');
+            Helper::print("Command '$command->commandName' not found!", 'error');
     }
 }
 

@@ -20,6 +20,11 @@ readonly class Commands
         $this->contact->find(intval($params[0]));
     }
 
+    public function create(string $command, string $params): void
+    {
+        $this->contact->create($params);
+    }
+
     public function help(): void
     {
         /**
@@ -48,5 +53,23 @@ readonly class Commands
             'delete' => 'Usage: delete [id INT]',
             'help' => 'Usage: Show this help! :)'
         ];
+    }
+
+    /**
+     * Initialize command and return relevant attributes.
+     *
+     * @param string $value
+     * @return mixed
+     */
+    public function initCommand(string $value): mixed
+    {
+        $raws = explode(' ', $value, 2);
+        $commandName = array_shift($raws);
+        $line = $raws[0] ?? null;
+        $params = explode(' ', $line);
+
+        $commandsList = compact(['raws', 'commandName', 'line', 'params']);
+
+        return json_decode(json_encode($commandsList));
     }
 }
