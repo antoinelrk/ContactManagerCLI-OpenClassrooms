@@ -1,5 +1,7 @@
 <?php
 
+use Core\Validator;
+
 class Contact
 {
     public function __construct(
@@ -36,9 +38,22 @@ class Contact
      *
      * @return array
      */
-    public function create(array $attributes): void
+    public function create(string $raws): void
     {
+        $attributes = Helper::toObject($raws);
 
+        $validator = Validator::make($attributes, [
+            'name' => 'required|string',
+            'email' => 'required|email',
+            'phone_number' => 'phone_number|required'
+        ]);
+
+        /**
+         * Vérifier si les clés existent (name, email etc..) faire un système de validation.
+         */
+
+//        $query = $this->db->prepare("INSERT INTO utilisateurs (nom, prenom, email) VALUES (:nom, :prenom, :email)");
+//        $query->bindParam(':name', $attributes);
     }
 
     /**

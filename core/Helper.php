@@ -78,4 +78,15 @@ class Helper
             'gray' => "\x1b[38;2;66;66;66m",
         };
     }
+
+    /**
+     * Set raw line to data attributes.
+     *
+     * @return array $attributes
+     */
+    public static function toObject(string $raws): array
+    {
+        preg_match_all('/(\w+):\"?([^\"\s]+)\"?\s*/', $raws, $matches);
+        return array_combine($matches[1], $matches[2]);
+    }
 }
