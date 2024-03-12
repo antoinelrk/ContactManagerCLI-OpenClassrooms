@@ -71,9 +71,17 @@ class Contact
      *
      * @return bool
      */
-    public function delete($id): void
+    public function delete($params): void
     {
-        Helper::print("Le contact '' a été supprimé.");
+        $id = intval($params[0]);
+        $query = $this->db->prepare("DELETE FROM contacts WHERE id = :id");
+        $query->bindParam(':id', $id);
+
+        if ($query->execute()) {
+            Helper::print("Le contact n°$id a été supprimée avec succès.");
+        } else {
+            echo "Erreur lors de la suppression : " . $query->error;
+        }
     }
 
     public function render(array $data): void

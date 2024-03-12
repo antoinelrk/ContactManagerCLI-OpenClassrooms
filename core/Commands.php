@@ -25,6 +25,11 @@ readonly class Commands
         $this->contact->create($params);
     }
 
+    public function delete(string $command, array $params): void
+    {
+        $this->contact->delete($params);
+    }
+
     public function help(): void
     {
         /**
