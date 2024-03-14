@@ -41,19 +41,25 @@ class Contact
     public function create(string $raws): void
     {
         $attributes = Helper::toObject($raws);
-
-        $validator = Validator::make($attributes, [
-            'name' => 'required|string',
-            'email' => 'required|email',
-            'phone_number' => 'phone_number|required'
-        ]);
+        var_dump($attributes);
+        return;
 
         /**
          * Vérifier si les clés existent (name, email etc..) faire un système de validation.
          */
 
-//        $query = $this->db->prepare("INSERT INTO utilisateurs (nom, prenom, email) VALUES (:nom, :prenom, :email)");
-//        $query->bindParam(':name', $attributes);
+        $query = $this->db->prepare("INSERT INTO contacts (name, email, phone_number) VALUES (:name, :email, :phone_number)");
+        $query->bindParam(':name', $attributes['name']);
+        $query->bindParam(':email', $attributes['email']);
+        $query->bindParam(':phone_number', $attributes['phone_number']);
+
+        try {
+            $query->execute();
+            echo "Bien ajouté";
+        } catch (PDOException $e)
+        {
+            echo $e;
+        }
     }
 
     /**
