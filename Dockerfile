@@ -1,5 +1,10 @@
 FROM alpine:3.19
 
+LABEL author="Antoine LRK <contact@antoinelrk.com>"
+LABEL description="Basic PHP-8.3 image"
+LABEL version="1.0.0"
+
+
 RUN mkdir /var/www
 
 WORKDIR /var/www

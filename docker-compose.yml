@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  contact_manager_cli:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: contact_manager_cli
+    depends_on:
+      - contact_manager_cli_database
+    volumes:
+      - ./:/var/www
+    networks:
+      - contact_manager_cli_lan
+
+  contact_manager_cli_database:
+    image: mariadb:10.4.4
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    container_name: contact_manager_cli_database
+    restart: always
+    volumes:
+      - ./database:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=local
+      - MYSQL_PASSWORD=local
+      - MYSQL_DATABASE=contact_manager_cli
+      - MYSQL_USER=local
+    networks:
+      - contact_manager_cli_lan
+
+  contact_manager_cli_phpmyadmin:
+    image: phpmyadmin
+    container_name: contact_manager_cli_phpmyadmin
+    restart: always
+    depends_on:
+      - contact_manager_cli_database
+    environment:
+      - PMA_ARBITRARY=1
+    ports:
+      - 8081:80
+    networks:
+      - contact_manager_cli_lan
+
+networks:
+  contact_manager_cli_lan:
+    name: contact_manager_cli_lan
