@@ -40,6 +40,7 @@ class Contact
      */
     public function create(string $raws): void
     {
+        $attributes = Helper::toObject($raws);
         /**
          * Make validation.
          */
@@ -53,7 +54,7 @@ class Contact
 
         try {
             $query->execute();
-            echo "Bien ajouté";
+            Helper::print($attributes['name'] . " a bien été ajouté à la liste des contacts.", 'info');
         } catch (PDOException $e)
         {
             echo $e;
