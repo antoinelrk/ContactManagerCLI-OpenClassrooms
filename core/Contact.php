@@ -54,7 +54,7 @@ class Contact
 
         try {
             $query->execute();
-            Helper::print($attributes['name'] . " a bien été ajouté à la liste des contacts.", 'info');
+            Helper::print($attributes['name'] . " a bien été ajouté à la liste des contacts.");
         } catch (PDOException $e)
         {
             echo $e;
