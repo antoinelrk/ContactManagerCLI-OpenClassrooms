@@ -40,15 +40,13 @@ class Contact
      */
     public function create(string $raws): void
     {
-        $attributes = Helper::toObject($raws);
-        var_dump($attributes);
-        return;
-
         /**
-         * Vérifier si les clés existent (name, email etc..) faire un système de validation.
+         * Make validation.
          */
 
-        $query = $this->db->prepare("INSERT INTO contacts (name, email, phone_number) VALUES (:name, :email, :phone_number)");
+        $sqlRequest = "INSERT INTO contacts (name, email, phone_number) VALUES (:name, :email, :phone_number)";
+
+        $query = $this->db->prepare($sqlRequest);
         $query->bindParam(':name', $attributes['name']);
         $query->bindParam(':email', $attributes['email']);
         $query->bindParam(':phone_number', $attributes['phone_number']);

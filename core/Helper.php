@@ -86,21 +86,13 @@ class Helper
      */
     public static function toObject(string $raws): array
     {
-        $result = [];
-        // Utilisation de l'expression régulière pour extraire les données
+        $result = null;
+        preg_match_all(REGEX, $raws, $matches, PREG_SET_ORDER);
 
-        $ok = '/(\w+)\s*:\s*"([^"]+)"\s*|\s*(\w+)\s*:\s*(\S+)/';
-
-        // '/(\w+):\s*"([^"]+)"/'
-        // '/(\w+):"([^"]+)"\s*|\s*(\w+):(\S+)/'
-
-        preg_match_all($ok, $raws, $matches, PREG_SET_ORDER);
-
-        print_r($matches);
-
-        // Remplissage du tableau résultat
         foreach ($matches as $match) {
-            $result[$match[1]] = $match[2];
+            $element = array_values(array_filter($match, fn($value) => !is_null($value) && $value !== '' && $value !== ' '));
+            array_shift($element);
+            $result[$element[0]] = $element[1];
         }
 
         return $result;
