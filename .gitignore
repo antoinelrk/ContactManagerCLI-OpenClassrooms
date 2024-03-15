@@ -1,7 +1,8 @@
 .vscode/
 .idea/
+database/
 
-*compose.yml
 .env
 package-lock.json
 composer.lock
+

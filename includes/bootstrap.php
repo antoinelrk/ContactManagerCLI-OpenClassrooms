@@ -1,7 +1,7 @@
 <?php
 
+include_once './Constants.php';
 include_once './core/Database.php';
 
-$db = new Database('database', 'ocp5', 'root', 'local');
+$db = new Database(DB_HOST, DB_DATABASE, DB_USER, DB_PASSWORD);
 $connection = $db->getConnection();
-const REGEX = '/(\w+)\s*:\s*"([^"]+)"\s*|\s*(\w+)\s*:\s*(\S+)/';
