@@ -6,7 +6,7 @@ Petit logiciel en ligne de commande fait en php afin d'alimenter une liste de co
 - email
 - phone_number
 
-*Screenshots here...*
+<img src="https://media.discordapp.net/attachments/1088757034909978685/1220657319692603403/2024-03-22-09-56-02-18206998.png?ex=660fbcb7&is=65fd47b7&hm=15ba89c26422ac53e2d79d0b5e15d9b5d34c8ea07f02fb7d4c737b1d0e904254">
 
 ## Setup
 
