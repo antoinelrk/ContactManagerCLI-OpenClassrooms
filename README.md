@@ -6,7 +6,7 @@ Petit logiciel en ligne de commande fait en php afin d'alimenter une liste de co
 - email
 - phone_number
 
-<img src="https://media.discordapp.net/attachments/1088757034909978685/1220657319692603403/2024-03-22-09-56-02-18206998.png?ex=660fbcb7&is=65fd47b7&hm=15ba89c26422ac53e2d79d0b5e15d9b5d34c8ea07f02fb7d4c737b1d0e904254">
+<img src="https://static.antoinelrk.com/openclassrooms/4abb73a3-75da-4d69-bb27-b736bb38246e.jpg">
 
 ## Setup
 
@@ -15,6 +15,8 @@ La configuration par défaut est prévue pour fonctionner directement avec Docke
 
 Il y deux manière de démarrer le projet; une "normale" en installant les outils nécessaire sur votre machine. Et une autre qui consiste a utiliser Docker (Conseillée).
 Vous avez un fichier ``docker-compose.yml`` et ``Dockerfile`` pré-remplis.
+
+### Démarrer avec Docker
 
 Après avoir lancé docker docker, vous pouvez démarrer la stack avec ``docker-compose``:
 
@@ -33,6 +35,18 @@ Les credentials sont:
 - Serveur: ``contact_manager_cli_database`` (C'est le nom du container dans le ``docker-compose.yml``)
 - Utilisateur: ``root``
 - Mot de passe: ``local``
+
+### Démarrage normal
+
+Prérequis:
+
+- Un serveur de base de données SQL disponible, avec une base de donnée nommée: ``contact_manager_cli``.
+   Le fichier ``contacts.sql`` contient un dump de la base sans données.
+- Php 8.3
+
+Ajouter vos informations de connexion SQL dans le fichier ``includes/Constants.php`` 
+
+Lancer le projet avec ``php index.php``
 
 # Améliorations prévues
 

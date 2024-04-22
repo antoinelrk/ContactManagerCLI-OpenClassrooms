@@ -1,6 +1,7 @@
 .vscode/
 .idea/
 database/
+config/php.ini
 
 .env
 package-lock.json
